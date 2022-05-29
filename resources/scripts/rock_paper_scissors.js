@@ -33,21 +33,22 @@ class RockPaperScissors {
    * @param {string} cpuSelection computer selection. Can only be one of the following values [`rock`, `paper`, `scissors`]
    */
   determineWinner(userSelection, cpuSelection){
-    if (userSelection == cpuSelection){
+    
+    if (userSelection === cpuSelection){
       return `tie`;
     }
-    else if (userSelection == `rock`){
-      if (cpuSelection == `scissors`){
+    else if (userSelection === `rock`){
+      if (cpuSelection === `scissors`){
         return `win`;
       }
     }
-    else if (userSelection == `paper`){
-      if (cpuSelection == `rock`){
+    else if (userSelection === `paper`){
+      if (cpuSelection === `rock`){
         return `win`;
       }
     }
-    else if (userSelection == `scissors`){
-      if (cpuSelection == `paper`){
+    else if (userSelection === `scissors`){
+      if (cpuSelection === `paper`){
         return `win`;
       }
     }
@@ -59,13 +60,30 @@ class RockPaperScissors {
    * @param {string} userSelection user selection. Can only be one of the following values [`rock`, `paper`, `scissors`]
    */
   play(userSelection){
-    var cpuSelection = this.generateCPUResponse();
-    this.determineWinner(userSelection, cpuSelection);
+    const cpuSelection = this.generateCPUResponse();
+    const result = this.determineWinner(userSelection, cpuSelection);
+
+    if(result == 'win'){
+      this.score.user ++;
+      this.gameHistoryLog.push(this.username + " selected: " + userSelection + " CPU seclected: " + cpuSelection + ". " + this.username + " WINS");  
+    }
+    else if(result == 'lose'){
+      this.score.cpu ++;
+      this.gameHistoryLog.push(this.username + " selected: " + userSelection + " CPU seclected: " + cpuSelection + " CPU WINS");
+    }
+    else if(result == 'tie'){
+      this.gameHistoryLog.push(this.username + " selected: " + userSelection + " CPU seclected: " + cpuSelection + " It's a Tie");
+    }
+
+
+    /*
+    var NEW_SCORE = this.determineWinner(userSelection, cpuSelection);
     this.score = {
       user: NEW_SCORE,
       cpu: NEW_SCORE
     }
-    this.gameHistoryLog.push(this.username + ` selected ` + userSelection+ `, CPU selected ` + cpuSelection + `: ` + this.determineWinner(userSelection, cpuSelection) + ` wins`);
+    */
+    
   }
 
 }

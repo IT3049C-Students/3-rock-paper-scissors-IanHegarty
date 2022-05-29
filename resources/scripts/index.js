@@ -23,14 +23,14 @@ function updateScoreTallyUI(){
 function updateGameHistoryUI(){
   gameHistoryParagraph.innerHTML = ``;
   for(let i = 0; i < game.gameHistoryLog.length; i++){
-    gameHistoryParagraph.innerHTML += game.gameHistoryLog[i] + "\n";
+    gameHistoryParagraph.innerHTML += game.gameHistoryLog[i] + "<br>";
   }
 }
 
 // start-game-button EventListener
 startGameButton.addEventListener(`click`, function () {
   event.preventDefault();
-  game = new RockPaperScissors(userName);
+  game = new RockPaperScissors(userName.value);
   // Complete
   welcomeScreen.classList.add(`d-none`);
   gameScreen.classList.remove(`d-none`);
